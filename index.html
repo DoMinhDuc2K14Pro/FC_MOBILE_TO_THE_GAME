@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Mobile VN - Cộng Đồng Game Thủ</title>
+    <title>FC Mobile VN - Có Thể Thao Tác</title>
     <style>
-        /* Reset cơ bản và phối màu chủ đạo của FC Mobile (Đen, Xanh Lá Neon/Vàng, Trắng) */
         * {
             margin: 0;
             padding: 0;
@@ -17,11 +16,6 @@
             background-color: #0b0e14;
             color: #ffffff;
             line-height: 1.6;
-        }
-
-        a {
-            color: #00ff66;
-            text-decoration: none;
         }
 
         /* Thanh Menu Điều Hướng */
@@ -41,7 +35,6 @@
             font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            color: #ffffff;
         }
 
         .logo span {
@@ -60,47 +53,37 @@
         nav ul li a {
             color: #aaaaaa;
             font-weight: 600;
+            cursor: pointer;
             transition: 0.3s;
+            padding: 5px 10px;
         }
 
         nav ul li a:hover, nav ul li a.active {
             color: #00ff66;
         }
 
-        /* Khu vực Banner Nổi Bật (Hero Section) */
-        .hero {
-            background: linear-gradient(rgba(11, 14, 20, 0.8), rgba(11, 14, 20, 0.9)), url('https://unsplash.com') no-repeat center center/cover;
-            padding: 100px 5%;
+        /* Khung tìm kiếm cầu thủ */
+        .search-container {
+            margin: 30px 0;
             text-align: center;
         }
 
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .hero p {
-            font-size: 18px;
-            color: #cccccc;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-
-        .btn-cta {
-            background-color: #00ff66;
-            color: #000000;
-            padding: 12px 30px;
-            font-weight: bold;
-            border-radius: 5px;
-            text-transform: uppercase;
+        .search-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #2d384e;
+            border-radius: 25px;
+            background-color: #121824;
+            color: white;
+            outline: none;
             transition: 0.3s;
-            display: inline-block;
         }
 
-        .btn-cta:hover {
-            background-color: #ffffff;
-            box-shadow: 0px 0px 15px #00ff66;
+        .search-box:focus {
+            border-color: #00ff66;
+            box-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
         }
 
         /* Nội dung chính */
@@ -118,7 +101,7 @@
             padding-left: 10px;
         }
 
-        /* Danh sách Thẻ Cầu Thủ (Player Cards Grid) */
+        /* Danh sách Thẻ Cầu Thủ */
         .player-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -133,11 +116,13 @@
             text-align: center;
             border: 1px solid #2d384e;
             transition: 0.3s;
+            cursor: pointer;
         }
 
         .player-card:hover {
             transform: translateY(-5px);
             border-color: #00ff66;
+            box-shadow: 0 5px 15px rgba(0, 255, 102, 0.1);
         }
 
         .ovr-badge {
@@ -173,7 +158,15 @@
             font-size: 14px;
         }
 
-        /* Chân trang Web */
+        /* Các Tab nội dung ẩn/hiện */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
         footer {
             background-color: #070a0f;
             text-align: center;
@@ -187,82 +180,114 @@
 </head>
 <body>
 
-    <!-- Thanh Điều Hướng -->
+    <!-- Thanh Điều Hướng (Click được) -->
     <header>
         <div class="logo">FC<span>MOBILE</span> VN</div>
         <nav>
             <ul>
-                <li><a href="#" class="active">Trang Chủ</a></li>
-                <li><a href="#">Cầu Thủ</a></li>
-                <li><a href="#">Sự Kiện</a></li>
-                <li><a href="#">Xây Dựng Đội Hình</a></li>
-                <li><a href="#">Tin Tức</a></li>
+                <li><a class="menu-link active" data-target="home-tab">Trang Chủ</a></li>
+                <li><a class="menu-link" data-target="player-tab">Tra Cứu Cầu Thủ</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Khu vực Banner chính -->
-    <section class="hero">
-        <h1>Chào mừng tới FC Mobile VN</h1>
-        <p>Cập nhật tin tức, tra cứu chỉ số cầu thủ, cẩm nang xây dựng đội hình hàng đầu Việt Nam.</p>
-        <a href="#" class="btn-cta">Xem Sự Kiện Mới</a>
-    </section>
-
-    <!-- Nội dung chính -->
     <div class="container">
         
-        <!-- Mục Cầu thủ tiêu biểu -->
-        <h2 class="section-title">Cầu thủ HOT mùa này</h2>
-        <div class="player-grid">
-            
-            <!-- Cầu thủ 1 -->
-            <div class="player-card">
-                <div class="ovr-badge">OVR 105</div>
-                <div class="player-avatar">🏃‍♂️</div>
-                <div class="player-name">Kylian Mbappé</div>
-                <div class="player-pos">ST | Real Madrid</div>
+        <!-- TAB 1: TRANG CHỦ -->
+        <div id="home-tab" class="tab-content active">
+            <h2 class="section-title">Tin tức mới nhất</h2>
+            <div style="background-color: #121824; padding: 20px; border-radius: 8px; border: 1px solid #2d384e; margin-bottom: 20px;">
+                <h3>Sự kiện Nhận Thẻ Cầu Thủ UCL Miễn Phí!</h3>
+                <p style="color: #aaaaaa; margin-top: 10px;">Hãy bấm sang tab "Tra Cứu Cầu Thủ" ở menu trên để trải nghiệm tính năng tìm kiếm cầu thủ vừa được kích hoạt.</p>
             </div>
-
-            <!-- Cầu thủ 2 -->
-            <div class="player-card">
-                <div class="ovr-badge">OVR 106</div>
-                <div class="player-avatar">🧙‍♂️</div>
-                <div class="player-name">Lionel Messi</div>
-                <div class="player-pos">RW | Inter Miami</div>
-            </div>
-
-            <!-- Cầu thủ 3 -->
-            <div class="player-card">
-                <div class="ovr-badge">OVR 104</div>
-                <div class="player-avatar">🤖</div>
-                <div class="player-name">Erling Haaland</div>
-                <div class="player-pos">ST | Man City</div>
-            </div>
-
-            <!-- Cầu thủ 4 -->
-            <div class="player-card">
-                <div class="ovr-badge">OVR 105</div>
-                <div class="player-avatar">🛡️</div>
-                <div class="player-name">Virgil van Dijk</div>
-                <div class="player-pos">CB | Liverpool</div>
-            </div>
-
         </div>
 
-        <!-- Mục Tin tức / Sự kiện -->
-        <h2 class="section-title">Tin tức mới nhất</h2>
-        <div style="background-color: #121824; padding: 20px; border-radius: 8px; border: 1px solid #2d384e;">
-            <h3>Cập nhật Sự kiện UEFA Champions League (UCL)</h3>
-            <p style="color: #aaaaaa; margin-top: 10px;">Sự kiện UCL chính thức đổ bộ FC Mobile mang theo hàng loạt thẻ cầu thủ nâng cấp động theo kết quả thực tế. Đừng bỏ lỡ các nhiệm vụ hàng ngày để nhận quà miễn phí!</p>
-            <a href="#" style="display:inline-block; margin-top: 15px; font-weight: bold;">Đọc thêm &rarr;</a>
+        <!-- TAB 2: TRA CỨU CẦU THỦ (Có tính năng tìm kiếm) -->
+        <div id="player-tab" class="tab-content">
+            <h2 class="section-title">Danh Sách Cầu Thủ</h2>
+            
+            <!-- Ô gõ tìm kiếm -->
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-box" placeholder="Nhập tên cầu thủ để tìm kiếm (Ví dụ: Messi, Mbappe...)" onkeyup="searchPlayer()">
+            </div>
+
+            <!-- Grid Cầu thủ -->
+            <div class="player-grid" id="playerGrid">
+                
+                <div class="player-card" onclick="alert('Bạn vừa click vào Kylian Mbappé!')">
+                    <div class="ovr-badge">OVR 105</div>
+                    <div class="player-avatar">🏃‍♂️</div>
+                    <div class="player-name">Kylian Mbappé</div>
+                    <div class="player-pos">ST | Real Madrid</div>
+                </div>
+
+                <div class="player-card" onclick="alert('Bạn vừa click vào Lionel Messi!')">
+                    <div class="ovr-badge">OVR 106</div>
+                    <div class="player-avatar">🧙‍♂️</div>
+                    <div class="player-name">Lionel Messi</div>
+                    <div class="player-pos">RW | Inter Miami</div>
+                </div>
+
+                <div class="player-card" onclick="alert('Bạn vừa click vào Erling Haaland!')">
+                    <div class="ovr-badge">OVR 104</div>
+                    <div class="player-avatar">🤖</div>
+                    <div class="player-name">Erling Haaland</div>
+                    <div class="player-pos">ST | Man City</div>
+                </div>
+
+                <div class="player-card" onclick="alert('Bạn vừa click vào Virgil van Dijk!')">
+                    <div class="ovr-badge">OVR 105</div>
+                    <div class="player-avatar">🛡️</div>
+                    <div class="player-name">Virgil van Dijk</div>
+                    <div class="player-pos">CB | Liverpool</div>
+                </div>
+
+            </div>
         </div>
 
     </div>
 
-    <!-- Chân trang -->
     <footer>
-        <p>&copy; 2026 FC Mobile VN Fan Fanpage. Tất cả bản quyền trò chơi thuộc về EA Sports.</p>
+        <p>&copy; 2026 FC Mobile VN Fan Fanpage.</p>
     </footer>
 
+    <!-- ĐOẠN CODE JAVASCRIPT GIÚP WEB THAO TÁC ĐƯỢC -->
+    <script>
+        // 1. Tính năng chuyển đổi qua lại giữa các Menu (Tab)
+        const links = document.querySelectorAll('.menu-link');
+        const tabs = document.querySelectorAll('.tab-content');
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                // Xóa trạng thái active cũ của menu
+                links.forEach(l => l.classList.remove('active'));
+                // Ẩn tất cả các tab nội dung
+                tabs.forEach(t => t.classList.remove('active'));
+
+                // Thêm active cho menu vừa click
+                link.classList.add('active');
+                // Hiển thị tab tương ứng
+                const targetTabId = link.getAttribute('data-target');
+                document.getElementById(targetTabId).classList.add('active');
+            });
+        });
+
+        // 2. Tính năng gõ từ khóa để tìm kiếm và lọc cầu thủ
+        function searchPlayer() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let cards = document.getElementsByClassName('player-card');
+
+            for (let i = 0; i < cards.length; i++) {
+                let playerName = cards[i].getElementsByClassName('player-name')[0].innerText.toLowerCase();
+                
+                // Nếu tên cầu thủ chứa từ khóa vừa gõ thì hiện, ngược lại thì ẩn đi
+                if (playerName.includes(input)) {
+                    cards[i].style.display = "";
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+        }
+    </script>
 </body>
 </html>
