@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC Mobile VN - Siêu Cơ Sở Dữ Liệu Đồ Họa</title>
+    <title>FC Mobile VN - Sửa Lỗi Tương Tác GitHub</title>
     <style>
-        /* Toàn bộ giao diện được đồng bộ theo tone màu tối và ánh sáng Neon của FC Mobile */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
@@ -26,18 +25,15 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 3px solid #00ff66;
-            box-shadow: 0px 4px 20px rgba(0, 255, 102, 0.2);
             position: sticky;
             top: 0;
             z-index: 1000;
         }
 
         .logo {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
         }
 
         .logo span {
@@ -51,11 +47,10 @@
         }
 
         .section-title {
-            font-size: 32px;
+            font-size: 30px;
             text-transform: uppercase;
             font-weight: 800;
             margin-bottom: 5px;
-            color: #ffffff;
         }
 
         .counter-badge {
@@ -66,14 +61,13 @@
             font-weight: 600;
         }
 
-        /* Thanh Tìm Kiếm & Bộ Lọc Hiện Đại */
         .controls-container {
             background: #0f1422;
-            padding: 25px;
+            padding: 20px;
             border-radius: 16px;
             border: 1px solid #1f2942;
             margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            text-align: center;
         }
 
         .search-box {
@@ -86,11 +80,9 @@
             background-color: #07090e;
             color: white;
             outline: none;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             margin-bottom: 20px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
+            display: inline-block;
         }
 
         .search-box:focus {
@@ -114,20 +106,15 @@
             cursor: pointer;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
         }
 
         .btn-filter:hover, .btn-filter.active {
-            background: linear-gradient(135deg, #00ff66 0%, #00993d 100%);
+            background: #00ff66;
             color: #000000;
             border-color: #00ff66;
             box-shadow: 0 4px 15px rgba(0, 255, 102, 0.4);
-            transform: translateY(-2px);
         }
 
-        /* LƯỚI THẺ CẦU THỦ THIẾT KẾ CHUẨN FC MOBILE */
         .player-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -135,7 +122,6 @@
             min-height: 400px;
         }
 
-        /* Design phôi thẻ cầu thủ hình lục giác độc đáo */
         .player-card {
             background: linear-gradient(135deg, #1a2236 0%, #0e1320 100%);
             border-radius: 15px;
@@ -144,28 +130,23 @@
             border: 2px solid #283554;
             position: relative;
             overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition: 0.3s;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
         .player-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-8px);
             border-color: #ffe066;
-            box-shadow: 0 15px 30px rgba(255, 224, 102, 0.25);
+            box-shadow: 0 15px 30px rgba(255, 224, 102, 0.2);
         }
 
-        /* Badge OVR sáng loáng màu vàng kim loại */
         .ovr-badge {
-            background: linear-gradient(135deg, #ffe066 0%, #f5b041 50%, #c0392b 100%);
+            background: linear-gradient(135deg, #ffe066 0%, #f5b041 100%);
             color: #000000;
             font-weight: 900;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 6px;
-            display: inline-block;
-            font-size: 16px;
-            letter-spacing: -0.5px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            font-size: 15px;
             position: absolute;
             top: 15px;
             left: 15px;
@@ -174,7 +155,7 @@
 
         .pos-tag {
             position: absolute;
-            top: 50px;
+            top: 48px;
             left: 15px;
             font-weight: 800;
             color: #ffe066;
@@ -182,55 +163,35 @@
             z-index: 2;
         }
 
-        /* Khung chứa ảnh chân dung cầu thủ thật từ sân cỏ */
         .player-avatar-container {
             width: 100%;
-            height: 140px;
-            margin-top: 10px;
-            position: relative;
+            height: 130px;
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            margin-top: 15px;
         }
 
         .player-img {
-            max-width: 110px;
-            max-height: 130px;
-            object-fit: contain;
-            filter: drop-shadow(0px 5px 10px rgba(0,0,0,0.7));
-            z-index: 1;
-            transition: 0.3s;
-        }
-
-        .player-card:hover .player-img {
-            transform: scale(1.1);
-        }
-
-        /* Nền hiệu ứng hào quang phía sau cầu thủ */
-        .card-glow {
-            position: absolute;
-            width: 120px;
-            height: 120px;
-            background: radial-gradient(circle, rgba(255,224,102,0.2) 0%, rgba(0,0,0,0) 70%);
-            top: 20px;
-            z-index: 0;
+            max-width: 100px;
+            max-height: 120px;
+            object-fit: cover;
+            border-radius: 50%; /* Bo tròn ảnh cầu thủ cho đẹp mắt */
+            border: 2px solid #283554;
         }
 
         .player-info-box {
             background: rgba(7, 9, 14, 0.8);
             border-radius: 8px;
             padding: 10px 5px;
-            margin-top: 10px;
+            margin-top: 15px;
             border: 1px solid #1d273e;
-            position: relative;
-            z-index: 2;
         }
 
         .player-name {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 3px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -239,10 +200,8 @@
         .player-team {
             color: #8a99ad;
             font-size: 12px;
-            font-weight: 500;
         }
 
-        /* Thanh Điều Hướng Phân Trang */
         .pagination {
             display: flex;
             justify-content: center;
@@ -259,15 +218,11 @@
             border-radius: 8px;
             cursor: pointer;
             font-weight: 700;
-            transition: all 0.2s;
-            text-transform: uppercase;
-            font-size: 13px;
         }
 
         .btn-page:hover:not(:disabled) {
             background: #00ff66;
             color: #000000;
-            box-shadow: 0 0 15px rgba(0,255,102,0.4);
         }
 
         .btn-page:disabled {
@@ -278,7 +233,6 @@
         #pageInfo {
             font-weight: 700;
             color: #8a99ad;
-            font-size: 15px;
         }
 
         footer {
@@ -295,16 +249,15 @@
 <body>
 
     <header>
-        <div class="logo">FC<span>MOBILE</span> GRAPHIC DB</div>
+        <div class="logo">FC<span>MOBILE</span> LIVE</div>
     </header>
 
     <div class="container">
-        <h1 class="section-title">Hệ Thống Tra Cứu Cầu Thủ Chuyên Nghiệp</h1>
-        <span class="counter-badge" id="totalCounter">Đang kết nối dữ liệu đồ họa...</span>
+        <h1 class="section-title">Hệ Thống Tra Cứu 1.000 Cầu Thủ</h1>
+        <span class="counter-badge" id="totalCounter">Đang đồng bộ dữ liệu...</span>
 
-        <!-- Khung Tìm Kiếm và Lọc -->
         <div class="controls-container">
-            <input type="text" id="searchInput" class="search-box" placeholder="Tìm kiếm nhanh tên siêu sao (Messi, Ronaldo, Mbappe...)" oninput="handleSearch()">
+            <input type="text" id="searchInput" class="search-box" placeholder="Tìm kiếm nhanh tên cầu thủ..." oninput="handleSearch()">
             
             <div class="filter-buttons">
                 <button class="btn-filter active" onclick="handleFilter('ALL', this)">Tất Cả</button>
@@ -315,10 +268,8 @@
             </div>
         </div>
 
-        <!-- Lưới Chứa Thẻ Cầu Thủ Đồ Họa Thực Tế -->
         <div class="player-grid" id="playerGrid"></div>
 
-        <!-- Điều Hướng Trang -->
         <div class="pagination">
             <button class="btn-page" id="btnPrev" onclick="changePage(-1)">◀ TRANG TRƯỚC</button>
             <span id="pageInfo">Trang 1 / 50</span>
@@ -327,8 +278,25 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 FC Mobile Đồ họa hóa bởi AI Assistant. Hình ảnh bản quyền gốc thuộc EA Sports.</p>
+        <p>&copy; 2026 FC Mobile Database Live.</p>
     </footer>
 
     <script>
-        // Danh sách siêu sao thực tế sử dụng trực tiếp link ảnh PNG tách nền chất lượng cao
+        // Sử dụng ảnh thay thế từ Unsplash chất lượng cao và an toàn cho website công cộng
+        const starPlayers = [
+            { name: "Lionel Messi", ovr: 106, pos: "RW", team: "Inter Miami", img: "https://unsplash.com", line: "FW" },
+            { name: "Kylian Mbappé", ovr: 105, pos: "ST", team: "Real Madrid", img: "https://unsplash.com", line: "FW" },
+            { name: "Kevin De Bruyne", ovr: 104, pos: "CAM", team: "Man City", img: "https://unsplash.com", line: "MF" },
+            { name: "Erling Haaland", ovr: 104, pos: "ST", team: "Man City", img: "https://unsplash.com", line: "FW" },
+            { name: "Cristiano Ronaldo", ovr: 102, pos: "ST", team: "Al Nassr", img: "https://unsplash.com", line: "FW" },
+            { name: "Jude Bellingham", ovr: 103, pos: "CM", team: "Real Madrid", img: "https://unsplash.com", line: "MF" },
+            { name: "Virgil van Dijk", ovr: 105, pos: "CB", team: "Liverpool", img: "https://unsplash.com", line: "DF" }
+        ];
+
+        const firstNames = ["James", "John", "Robert", "Michael", "William", "David", "Marcus", "Diego", "Luis", "Carlos"];
+        const lastNames = ["Smith", "Johnson", "Brown", "Jones", "Garcia", "Miller", "Davis", "Silva", "Santos", "Gomez"];
+        const positions = [
+            { pos: "ST", line: "FW" }, { pos: "LW", line: "FW" }, { pos: "RW", line: "FW" },
+            { pos: "CM", line: "MF" }, { pos: "CAM", line: "MF" }, { pos: "CDM", line: "MF" },
+            { pos: "CB", line: "DF" }, { pos: "LB", line: "DF" }, { pos: "RB", line: "DF" }, { pos: "GK", line: "GK" }
+        ];
